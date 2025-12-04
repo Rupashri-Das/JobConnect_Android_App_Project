@@ -1,0 +1,39 @@
+# Project Report: JobConnect - Job Search App
+
+Author: Rupashri Das
+Course: Product Design and Development IT23SP
+Date: November 30, 2025
+
+1. Introduction and Project Goal
+
+JobConnect is a mobile application built using Kotlin and Jetpack Compose designed to assist students and recent graduates in managing job opportunities. The primary goal of the application was to fulfill all required components of the semester project, specifically demonstrating expertise in clean architecture, state management, and local data persistence. The app allows users to search simulated job postings, view details, and save their favorite opportunities locally. The application successfully implements the three required screens: the Job Search List, the Job Detail Screen, and the Saved Jobs List.
+
+2. Architecture and Technology Stack
+
+The application utilizes the MVVM (Model-View-ViewModel) architecture to ensure a clean separation of concerns. This separation proved crucial during refactoring and debugging.
+
+UI Layer: Built entirely using Jetpack Compose for a modern, declarative user interface, adhering to Material 3 Design principles. Navigation between the three distinct screens is handled by the **Compose Navigation** library.
+State Management: State is managed by dedicated **ViewModels** (`JobListViewModel`, `JobDetailViewModel`, `SavedJobsViewModel`). Data is exposed to the UI layer using **Kotlin Flow / StateFlow**, ensuring the application's screens update automatically and in real-time when underlying data changes.
+Data Persistence Layer: The app meets the persistence requirement by using the **Room Persistence Library**. Room is used to maintain a local database of all jobs that the user explicitly marks as "saved" (favorites). This local database provides the data source for the Saved Jobs screen. The application uses an **Application Container** for manual Dependency Injection (DI) to reliably provide the Repository and Database instances to the ViewModels.
+
+3. Core Functionality and Implementation
+
+The primary function of JobConnect is the Save/Unsave feature. When a user views a job from the simulated search results, the **JobDetailViewModel** checks the local Room database to see if the job is already saved. When the user taps the bookmark icon, the ViewModel executes a coroutine task via the **Repository** to either insert the job into Room (save) or delete it (unsave). This action triggers the `StateFlow` in the **SavedJobsViewModel**, which instantly refreshes the dedicated Saved Jobs List screen.
+
+4. Challenges and Resolution
+
+The project presented two significant challenges that required meticulous debugging and architectural adjustments:
+
+1.  Refactoring the Data Model: The initial application concept had to be pivoted from a job *posting* tool to a job *search* tool. This required replacing the CRUD (Create/Update/Delete) functionality with logic to manage two distinct data sources simultaneously: hardcoded "fake data" for the search results, and the local **Room DAO** for the user's saved list. This refactoring was complex but ultimately led to a stronger, clearer repository pattern.
+2.  Dependency and Build Instability: The project encountered persistent errors related to complex dependencies, such as the missing **Material Icons Extended** library and repeated compilation failures related to accessing navigation arguments through the ViewModel Factory. These were resolved by manually adding specific test dependencies and simplifying the ViewModel Factory injection pattern to bypass unstable experimental features, ensuring a robust and clean final build.
+
+5. Lessons Learned
+
+The completion of this project provided critical insights into core Android development practices. Most importantly, the process solidified the understanding of the **Unidirectional Data Flow (UDF)** in MVVM, demonstrating how coroutines manage background database work and how `StateFlow` efficiently communicates these updates to the UI. The required **Unit Test** for the `JobDetailViewModel` also reinforced the value of architecture, proving that the business logic could be tested in isolation, independent of the Compose UI.
+
+
+#Tools Used
+**IDE:** Android Studio Narwhal 2025.1.4
+**Language:** Kotlin
+**Testing:** JUnit, Mockito
+**Version Control:** Git / GitHub
