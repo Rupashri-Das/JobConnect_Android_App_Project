@@ -7,7 +7,7 @@ JobConnect is a simple student-focused android app built with Kotlin and Jetpack
 **Save/Unsave (Favorites):** Allows users to save jobs to local storage (Room database).
 **Saved Jobs List:** Dedicated screen to view all favorited jobs.
 **State Management:** Uses ViewModel and Kotlin Flow/StateFlow.
-**UI/UX:** Implements Material 3 design and dark mode support.
+**UI/UX:** Implements Material 3 design.
 **Testing:** Includes at least one Unit Test (`JobDetailViewModelTest`).
 
 ## Tech Stack
