@@ -1,10 +1,8 @@
 # JobConnect_Android_App_Project
-JobConnect is a student-focused app built with Kotlin and Jetpack Compose. It lets users see the job list and description of the job and save or unsave their favorites locally using an MVVM architecture with Room database persistence.
-
-A simple Android application designed for students to search simulated job postings (using local, hardcoded data) and manage their favorite opportunities using local persistence.
+JobConnect is a simple student-focused android app built with Kotlin and Jetpack Compose. It lets users see the job list and description of the job and save or unsave their favorites locally using an MVVM architecture with Room database persistence. With this, they can see the simulated job postings (using local, hardcoded data) and manage their favorite opportunities using local persistence.
 
 ## Features
-**Job Search List:** Displays all available job opportunities.
+**Job Post List:** Displays all available job opportunities.
 **Job Detail View:** Shows full job description and details.
 **Save/Unsave (Favorites):** Allows users to save jobs to local storage (Room database).
 **Saved Jobs List:** Dedicated screen to view all favorited jobs.
